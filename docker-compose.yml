@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  langchat-slides:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: langchat-slides
+    ports:
+      - "5173:5173"
+    environment:
+      # OpenAI Configuration
+      - VITE_OPENAI_API_KEY=${VITE_OPENAI_API_KEY:-}
+      - VITE_OPENAI_MODEL=${VITE_OPENAI_MODEL:-gpt-4o}
+      
+      # Application Configuration
+      - VITE_APP_LOCALE=${VITE_APP_LOCALE:-en}
+      - VITE_APP_THEME=${VITE_APP_THEME:-auto}
+    restart: unless-stopped
+    networks:
+      - langchat-network
+
+networks:
+  langchat-network:
+    driver: bridge
