@@ -11,10 +11,10 @@ import {
 } from '@/components/ui/dropdown-menu'
 import {useAppStore} from '@/stores/useAppStore'
 import {nanoid} from 'nanoid'
-import {PlayCircle, Sparkles, Check} from 'lucide-vue-next'
+import {Check, PlayCircle, Sparkles} from 'lucide-vue-next'
 import {useThrottleFn} from '@vueuse/core'
-import {examples} from '@/examples/examples'
 import type {Example} from '@/examples/examples'
+import {examples} from '@/examples/examples'
 
 const store = useAppStore()
 
@@ -74,7 +74,7 @@ async function simulateStreamResponse(example: Example) {
     store.isStreaming = false
     // Final update to ensure all content is rendered
     store.updateLastMessage(fullContent)
-    parseSlides(fullContent)
+    // parseSlides(fullContent)
   }
 }
 
@@ -92,11 +92,8 @@ function parseSlides(content: string) {
       
       body = body.trim()
       
-      const titleMatch = body.match(/^title\s+(.*)/m)
-      
       const slide = {
         id: `slide-${index}`,
-        title: (titleMatch && titleMatch[1]) ? titleMatch[1] : `Slide ${index + 1}`,
         content: body,
         syntax: body
       }
@@ -137,9 +134,9 @@ function handleGenerateExample(example: Example) {
       <DropdownMenuItem
         v-for="example in examples"
         :key="example.id"
-        @click="handleGenerateExample(example)"
-        class="cursor-pointer gap-2"
         :class="selectedExample?.id === example.id ? 'bg-accent' : ''"
+        class="cursor-pointer gap-2"
+        @click="handleGenerateExample(example)"
       >
         <div class="flex flex-col gap-0.5 flex-1">
           <span class="font-medium">{{ example.name }}</span>

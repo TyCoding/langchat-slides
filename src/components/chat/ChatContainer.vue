@@ -119,16 +119,12 @@ function parseSlides(content: string, initialSlides: Slide[] = []) {
       // AI might output without dashes, so we need to add them
       // body = fixSlideSyntax(body) // DISABLED: Causing issues with valid syntax
       
-      // Try to extract title from syntax or default
-      const titleMatch = body.match(/^title\s+(.*)/m)
-      
       // Calculate offset index for ID generation if appending
       // For replace mode, index is just index
       const globalIndex = store.slideRenderMode === 'append' ? (initialSlides.length + index) : index
       
       const slide: Slide = {
         id: `slide-${globalIndex}`, // Stable ID
-        title: (titleMatch && titleMatch[1]) ? titleMatch[1] : `Slide ${globalIndex + 1}`,
         content: body,
         syntax: body
       }

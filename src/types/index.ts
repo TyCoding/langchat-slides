@@ -9,7 +9,7 @@ export interface Message {
 
 export interface Slide {
   id: string
-  title: string
+  title?: string
   content: string
   syntax: string
 }

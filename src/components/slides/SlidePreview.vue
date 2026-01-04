@@ -100,8 +100,7 @@ function renderInfographic(newSyntax: string) {
 
     // Update title in store from rendered options
     const options = store.infographic.getOptions()
-    console.log(options)
-    
+
     // Only update if we have a valid title and it's different
     if (options?.data?.title && store.currentSlide) {
       store.slides[store.currentSlideIndex].title = options.data.title
