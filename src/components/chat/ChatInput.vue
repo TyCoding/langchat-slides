@@ -5,14 +5,8 @@ import {Textarea} from '@/components/ui/textarea'
 import {Loader2, SendHorizontal} from 'lucide-vue-next'
 import {useAppStore} from '@/stores/useAppStore'
 import {useI18n} from '@/composables/useI18n'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { infographicTemplates } from '@/lib/slide-utils'
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '@/components/ui/select'
+import {infographicTemplates} from '@/lib/slide-utils'
 
 const emit = defineEmits<{
   (e: 'send', text: string, theme?: string): void
@@ -21,7 +15,7 @@ const emit = defineEmits<{
 const store = useAppStore()
 const { t } = useI18n()
 const input = ref('')
-const selectedTheme = ref(infographicTemplates[0].value)
+const selectedTheme = ref(infographicTemplates[0]!.value)
 
 function handleSend() {
   if (!input.value.trim() || store.isStreaming) return
